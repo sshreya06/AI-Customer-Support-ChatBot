@@ -296,7 +296,9 @@ DATABASE_PATH=./database.db
 - Flask community for excellent documentation
 - UI inspiration from modern chat applications
 
-## 📸 Screenshots
+## 🎥 Demo Video
+
+🎬 [Watch the Demo Video](https://drive.google.com/file/d/11eg2MeAqw3H3IiO8TqXckthUah3wOSop/view?usp=sharing)
 
 
 
