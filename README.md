@@ -6,29 +6,28 @@ A fully-featured AI-powered customer support chatbot built with Flask, Groq API,
 ## ✨ Features
 
 ### Core Functionality
-- **🤖 AI-Powered Responses** - Uses Groq API (Llama 3.3) for intelligent, context-aware responses
-- **📚 FAQ Integration** - 40+ pre-configured FAQs across multiple categories
-- **💬 Conversation Memory** - Maintains context throughout the conversation
-- **🚨 Smart Escalation** - Automatically escalates complex queries to human agents
-- **📊 Session Tracking** - SQLite database stores all conversations
-- **📝 Conversation Summarization** - AI-generated summaries of chat sessions
-- **💡 Suggested Actions** - Context-aware next-step suggestions
+- **AI-Powered Responses** - Uses Groq API (Llama 3.3) for intelligent, context-aware responses
+- **FAQ Integration** - 40+ pre-configured FAQs across multiple categories
+- **Conversation Memory** - Maintains context throughout the conversation
+- **Smart Escalation** - Automatically escalates complex queries to human agents
+- **Session Tracking** - SQLite database stores all conversations
+- **Conversation Summarization** - AI-generated summaries of chat sessions
+- **Suggested Actions** - Context-aware next-step suggestions
 
 ### User Interface
-- **🎨 Modern, Professional Design** - Gradient purple theme with smooth animations
-- **🍔 Burger Menu Navigation** - Clean side menu for all actions
-- **🎤 Voice Input** - Speech-to-text functionality for hands-free messaging
-- **📜 Chat History** - View and load previous conversations
-- **⏱️ Message Timestamps** - Track when messages were sent
-- **👤 User Labels** - Clear identification of user vs support agent messages
-- **📱 Responsive Design** - Works on desktop and mobile devices
+- **Modern, Professional Design** - Gradient purple theme with smooth animations
+- **Burger Menu Navigation** - Clean side menu for all actions
+- **Chat History** - View and load previous conversations
+- **Message Timestamps** - Track when messages were sent
+- **User Labels** - Clear identification of user vs support agent messages
+- **Responsive Design** - Works on desktop and mobile devices
 
 ### Technical Features
-- **🔧 REST API Backend** - Clean Flask API with CORS support
-- **💾 Database Persistence** - SQLite for conversation storage
-- **🔄 Real-time Updates** - Dynamic conversation loading
-- **🎯 Action Buttons** - Interactive suggested actions
-- **📋 FAQ Page** - Dedicated, searchable FAQ interface with collapsible categories
+- **REST API Backend** - Clean Flask API with CORS support
+- **Database Persistence** - SQLite for conversation storage
+- **Real-time Updates** - Dynamic conversation loading
+- **Action Buttons** - Interactive suggested actions
+- **FAQ Page** - Dedicated, searchable FAQ interface with collapsible categories
 
 ## 🚀 Getting Started
 
@@ -220,13 +219,6 @@ curl -X POST http://127.0.0.1:5000/api/chat \
   -d '{"message": "What are your business hours?"}'
 ```
 
-### Test Voice Recording
-1. Open chat interface
-2. Click microphone button (🎤)
-3. Allow microphone access
-4. Speak your message
-5. Recording converts to text automatically
-
 ## 📊 Technologies Used
 
 ### Backend
@@ -241,12 +233,6 @@ curl -X POST http://127.0.0.1:5000/api/chat \
 - **Web Speech API** - Voice recording
 - **Fetch API** - Async requests
 
-## 🛠️ Troubleshooting
-
-### Voice Recording Not Working
-- **Chrome/Edge Only**: Speech recognition works best in Chrome or Edge
-- **HTTPS Required**: For production, voice recording requires HTTPS
-- **Permissions**: Make sure to allow microphone access
 
 ### Backend Not Starting
 ```bash
@@ -312,15 +298,6 @@ DATABASE_PATH=./database.db
 
 ## 📸 Screenshots
 
-### Main Chat Interface
-![Chat Interface](screenshots/chat.png)
 
-### FAQ Page
-![FAQ Page](screenshots/faqs.png)
-
-### Burger Menu
-![Menu](screenshots/menu.png)
-
----
 
 **Made with ❤️ for better customer support**
