@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Customer Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 16px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: transform 0.2s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .faq-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        
+        .faq-item:hover {
+            background: #f7fafc;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 8px;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #2d3748;
+            font-size: 17px;
+            font-weight: 600;
+        }
+        
+        .faq-icon {
+            font-size: 24px;
+            color: #667eea;
+            transition: transform 0.3s;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 15px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #718096;
+            font-size: 16px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+
+        .results-count {
+            color: #718096;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .category-group {
+            margin-bottom: 20px;
+        }
+        
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        .category-header h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .category-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+        
+        .category-group.active .category-icon {
+            transform: rotate(45deg);
+        }
+        
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            padding: 0 10px;
+        }
+        
+        .category-group.active .category-content {
+            max-height: 5000px;
+            padding: 20px 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Chat</a>
+        
+        <div class="header">
+            <h1>📚 Frequently Asked Questions</h1>
+            <p>Find answers to common questions about our services</p>
+        </div>
+        
+        <div class="faq-section" id="faqSection">
+            <div class="no-results" id="noResults">Loading FAQs...</div>
+        </div>
+    </div>
+
+    <script>
+        let allFaqs = [];
+
+        // Load FAQs from file
+        async function loadFAQs() {
+            try {
+                const response = await fetch('faqs.json');
+                const data = await response.json();
+                allFaqs = data.faqs;
+                
+                displayFAQs();
+            } catch (error) {
+                console.error('Error loading FAQs:', error);
+                document.getElementById('noResults').textContent = 'Error loading FAQs. Please try again later.';
+            }
+        }
+
+        function displayFAQs() {
+            const faqSection = document.getElementById('faqSection');
+            const noResults = document.getElementById('noResults');
+            
+            if (allFaqs.length === 0) {
+                noResults.textContent = 'No FAQs available.';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            
+            // Group by category
+            const grouped = allFaqs.reduce((acc, faq) => {
+                if (!acc[faq.category]) acc[faq.category] = [];
+                acc[faq.category].push(faq);
+                return acc;
+            }, {});
+            
+            faqSection.innerHTML = `
+                <div class="results-count">Showing ${allFaqs.length} result${allFaqs.length !== 1 ? 's' : ''}</div>
+                ${Object.entries(grouped).map(([category, items]) => `
+                    <div class="category-group">
+                        <div class="category-header" onclick="toggleCategory(this)">
+                            <h2>${category.charAt(0).toUpperCase() + category.slice(1)} (${items.length})</h2>
+                            <span class="category-icon">+</span>
+                        </div>
+                        <div class="category-content">
+                            ${items.map(faq => `
+                                <div class="faq-item" onclick="toggleFAQ(event, this)">
+                                    <div class="faq-question">
+                                        <span>${faq.question}</span>
+                                        <span class="faq-icon">+</span>
+                                    </div>
+                                    <div class="faq-answer">${faq.answer}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `).join('')}
+            `;
+        }
+
+        function toggleCategory(element) {
+            const categoryGroup = element.parentElement;
+            const wasActive = categoryGroup.classList.contains('active');
+            
+            // Toggle the clicked category
+            if (wasActive) {
+                categoryGroup.classList.remove('active');
+            } else {
+                categoryGroup.classList.add('active');
+            }
+        }
+        
+        function toggleFAQ(event, element) {
+            event.stopPropagation(); // Prevent category from closing
+            const wasActive = element.classList.contains('active');
+            
+            // Close all FAQs in this category
+            const categoryContent = element.closest('.category-content');
+            categoryContent.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!wasActive) {
+                element.classList.add('active');
+            }
+        }
+
+        // Load FAQs on page load
+        loadFAQs();
+    </script>
+</body>
+</html>
