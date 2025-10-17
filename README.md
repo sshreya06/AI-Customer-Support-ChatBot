@@ -298,8 +298,7 @@ DATABASE_PATH=./database.db
 
 ## 🎥 Demo Video
 
-🎬 [Watch the Demo Video](https://drive.google.com/file/d/11eg2MeAqw3H3IiO8TqXckthUah3wOSop/view?usp=sharing)
-
+🎬 [Watch the Demo Video](https://drive.google.com/file/d/1ak1DbCapJ_ue3off5M1U8FOnWi8WKYhg/view?usp=sharing)
 
 
 **Made with ❤️ for better customer support**
